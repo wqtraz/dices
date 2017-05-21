@@ -26,5 +26,5 @@ def scores(n):
 
 
 def sroll(n, sides):
-    return sum(list(d(sides) for _ in range(n)))
+    return sum(roll(n, sides))
 
