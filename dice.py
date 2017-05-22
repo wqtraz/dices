@@ -1,6 +1,19 @@
+"""
+Roll different types of dice and return their results.
+
+The d(sides) function rolls a multi-faced die.
+The adv(sides) function rolls a multi-faced die with advantage.
+The dis(sides) function rolls a multi-faced die with disadvantage.
+The roll(n, sides) function rolls multiple multi-faced dice.
+The score() function rolls 4d6r1k3.
+The scores(n) function calls the score function multiple times.
+The sroll(n, sides) rolls multiple multi-faced dice and sums them.
+"""
+
 from random import randint
 def d(sides):
-    """Roll a die.
+    """
+    Roll a multi-faced die and return an int.
     
     Keyword argument:
     sides -- number of sides on the die
@@ -9,7 +22,8 @@ def d(sides):
 
 
 def adv(sides):
-    """Roll two dice and drop the lowest.
+    """
+    Roll two multi-faced dice and drop the lowest, returning an int.
     
     Keyword argument:
     sides -- number of sides on the dice
@@ -18,7 +32,8 @@ def adv(sides):
 
 
 def dis(sides):
-    """Roll two dice and drop the highest.
+    """
+    Roll two multi-faced dice and drop the highest, returning an int.
     
     Keyword argument:
     sides -- number of sides on the dice
@@ -27,17 +42,19 @@ def dis(sides):
 
 
 def roll(n, sides):
-    """Roll multiple dice and return a list.
+    """
+    Roll multiple dice and return a list.
     
     Keyword arguments:
     n -- number of dice rolled
     sides -- number of sides on the dice
     """
-    return tuple(d(sides) for _ in range(n))
+    return list(d(sides) for _ in range(n))
 
 
 def score():
-    """Roll an ability score.
+    """
+    Roll an ability score by rolling 4d6r1k3 and return an int.
     
     roll four six-sided dice
     reroll ones and drop the lowest
@@ -48,16 +65,18 @@ def score():
 
 
 def scores(n):
-    """Roll multiple ability scores and return a list.
+    """
+    Roll multiple ability scores and return a list.
     
     Keyword argument:
     n -- number of ability scores rolled
     """
-    return tuple(score() for _ in range(n))
+    return list(score() for _ in range(n))
 
 
 def sroll(n, sides):
-    """Add dice rolls together.
+    """
+    Add dice rolls together and return an int.
     
     Keyword arguments:
     n -- number of dice rolled
