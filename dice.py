@@ -27,7 +27,7 @@ def dis(sides):
 
 
 def roll(n, sides):
-    """Roll multiple dice.
+    """Roll multiple dice and return a list.
     
     Keyword arguments:
     n -- number of dice rolled
@@ -48,7 +48,7 @@ def score():
 
 
 def scores(n):
-    """Roll multiple ability scores.
+    """Roll multiple ability scores and return a list.
     
     Keyword argument:
     n -- number of ability scores rolled
