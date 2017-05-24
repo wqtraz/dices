@@ -83,23 +83,47 @@ def sroll(n, sides):
     """
     return sum(roll(n, sides))
 
-def ValiderIntPositif(p_question:str):
-    """Valide le Int que l'utilisateur a entré
+def ValidateInt(p_question:str):
+    """
+    Validates the Int that the user entered.
 
     Keyword arguments:
-    p_question -- la question qui est posé à l'utilisateur
+    p_question -- question posed to the user
     """
-    number = 0
-    while True :
+    while True:
         try:
             number = int(input(p_question))
-            if (number < 0):
-                print("***Enter a positive number you dangus")
-            else:
-                return number
-        except Exception:
+            return number
+        except ValueError:
             print("***Enter a number without decimals you dangus")
 
-nombre = ValiderIntPositif("Enter a number : ")
-if (nombre != 0):
-    print(d(nombre))
+def ValidatePositiveInt(p_question:str):
+    """
+    Validates the positive Int that the user entered.
+
+    Keyword arguments:
+    p_question -- question posed to the user
+    """
+    while True:
+        number = ValidateInt(p_question)
+        if (number < 0):
+            print("***Enter a positive number you dangus")
+        else:
+            return number
+
+def ValidateNegativeInt(p_question:str):
+    """
+    Validates the negative Int that the user entered.
+
+    Keyword arguments:
+    p_question -- question posed to the user
+    """
+    while True:
+        number = ValidateInt(p_question)
+        if (number > 0):
+            print("***Enter a negative number you dangus")
+        else:
+            return number
+
+nombre = ValidateInt("Enter a number : ")
+print(nombre)
