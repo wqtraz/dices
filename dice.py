@@ -1,6 +1,5 @@
 """
 Roll different types of dice and return their results.
-
 The d(sides) function rolls a multi-faced die.
 The adv(sides) function rolls a multi-faced die with advantage.
 The dis(sides) function rolls a multi-faced die with disadvantage.
@@ -84,3 +83,22 @@ def sroll(n, sides):
     """
     return sum(roll(n, sides))
 
+def ValiderIntPositif(p_question:str):
+    """Valide le Int que l'utilisateur a entré
+
+    Keyword arguments:
+    p_question -- la question qui est posé à l'utilisateur
+    """
+    number = 0
+    while True :
+        try:
+            number = int(input(p_question))
+        except Exception:
+            print("***Enter an actual number you dangus")
+        if (number <= 0):
+            print("***Enter a positive number without decimals you dangus")
+        else:
+            return number
+
+
+print(d(ValiderInt("Enter a number : ")))
