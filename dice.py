@@ -93,12 +93,13 @@ def ValiderIntPositif(p_question:str):
     while True :
         try:
             number = int(input(p_question))
+            if (number < 0):
+                print("***Enter a positive number you dangus")
+            else:
+                return number
         except Exception:
-            print("***Enter an actual number you dangus")
-        if (number <= 0):
-            print("***Enter a positive number without decimals you dangus")
-        else:
-            return number
+            print("***Enter a number without decimals you dangus")
 
-
-print(d(ValiderInt("Enter a number : ")))
+nombre = ValiderIntPositif("Enter a number : ")
+if (nombre != 0):
+    print(d(nombre))
