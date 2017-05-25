@@ -1,23 +1,37 @@
 """
 Roll different types of dice and return their results.
-The d(sides) function rolls a multi-faced die.
-The adv(sides) function rolls a multi-faced die with advantage.
-The dis(sides) function rolls a multi-faced die with disadvantage.
-The roll(n, sides) function rolls multiple multi-faced dice.
-The score() function rolls 4d6r1k3.
-The scores(n) function calls the score function multiple times.
-The sroll(n, sides) rolls multiple multi-faced dice and sums them.
+
+The roll function rolls multi-faced dice.
+The sroll function rolls multi-faced dice and sums them.
+The adv function rolls a multi-faced die with advantage.
+The dis function rolls a multi-faced die with disadvantage.
+The _score function rolls a 4d6r1k3 score.
+The score function rolls multiple scores.
 """
 
 from random import randint
-def d(sides):
+def roll(n, sides, modifier):
     """
-    Roll a multi-faced die and return an int.
+    Roll multiple dice and return a list of ints.
     
-    Keyword argument:
-    sides -- number of sides on the die
+    Keyword arguments:
+    n -- number of dice rolled
+    sides -- number of sides on the dice
+    modifier -- number added to each die after rolled
     """
-    return randint(1, sides)
+    return list(int(randint(1, sides) + modifier) for _ in range(n))
+
+
+def sroll(n, sides, modifier):
+    """
+    Add dice rolls together and return an int.
+    
+    Keyword arguments:
+    n -- number of dice rolled
+    sides -- number of sides on the dice
+    modifier -- number added to each die after rolled
+    """
+    return sum(roll(n, sides, modifier))
 
 
 def adv(sides):
@@ -27,7 +41,7 @@ def adv(sides):
     Keyword argument:
     sides -- number of sides on the dice
     """
-    return max(tuple(d(sides) for _ in range(2)))
+    return max(roll(2, sides, 0))
 
 
 def dis(sides):
@@ -37,21 +51,10 @@ def dis(sides):
     Keyword argument:
     sides -- number of sides on the dice
     """
-    return min(tuple(d(sides) for _ in range(2)))
+    return min(roll(2, sides, 0))
 
 
-def roll(n, sides):
-    """
-    Roll multiple dice and return a list.
-    
-    Keyword arguments:
-    n -- number of dice rolled
-    sides -- number of sides on the dice
-    """
-    return list(d(sides) for _ in range(n))
-
-
-def score():
+def _score():
     """
     Roll an ability score by rolling 4d6r1k3 and return an int.
     
@@ -63,25 +66,14 @@ def score():
     return sum(scoreroll)
 
 
-def scores(n):
+def score(n):
     """
-    Roll multiple ability scores and return a list.
+    Roll multiple ability scores by rolling 4d6r1k3 and return a list.
     
     Keyword argument:
     n -- number of ability scores rolled
     """
-    return list(score() for _ in range(n))
-
-
-def sroll(n, sides):
-    """
-    Add dice rolls together and return an int.
-    
-    Keyword arguments:
-    n -- number of dice rolled
-    sides -- number of sides on the dice
-    """
-    return sum(roll(n, sides))
+    return list(_score() for _ in range(n))
 
 def ValidateInt(p_question:str):
     """
