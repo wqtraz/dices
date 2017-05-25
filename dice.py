@@ -61,9 +61,9 @@ def _score():
     roll four six-sided dice
     reroll ones and drop the lowest
     """
-    scoreroll = list(randint(2, 6) for _ in range(4))
-    scoreroll.remove(min(scoreroll))
-    return sum(scoreroll)
+    score_roll = list(randint(2, 6) for _ in range(4))
+    score_roll.remove(min(score_roll))
+    return sum(score_roll)
 
 
 def score(n):
