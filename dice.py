@@ -78,6 +78,9 @@ def score(n):
     return list(_score() for _ in range(n))
 
 
-nombre = validation.ValidateIntInsideInterval("Enter a number : ", 4, 8)
-print(nombre)
-nombre = validation.ValidateNegativeInt("Enter a number : ")
+nombreInt = validation.ValidateIntInsideInterval("Enter a number : ", 4, 8)
+print(nombreInt)
+nombreFloat = validation.ValidateFloatInsideInterval("Enter a number : ",4.65 , 8.99)
+print(nombreFloat)
+no = validation.ValidateFloat("Enter a number : ")
+print(no)
