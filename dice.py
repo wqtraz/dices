@@ -10,7 +10,7 @@ The score function rolls multiple scores.
 """
 
 from random import randint
-from util import validation
+from util import validation, special
 
 def roll(n, sides, modifier):
     """
@@ -80,7 +80,6 @@ def score(n):
 
 nombreInt = validation.ValidateIntInsideInterval("Enter a number : ", 4, 8)
 print(nombreInt)
-nombreFloat = validation.ValidateFloatInsideInterval("Enter a number : ",4.65 , 8.99)
+nombreFloat = validation.ValidateFloatInsideInterval("Enter a number : ", 4.65 , 8.99)
 print(nombreFloat)
-no = validation.ValidateFloat("Enter a number : ")
-print(no)
+special.Wait("Press Enter to exit...")

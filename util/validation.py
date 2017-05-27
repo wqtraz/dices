@@ -1,12 +1,5 @@
 """
 Validate what the user entered and handle exceptions.
-
-Validates the Int that the user entered.
-Validates the positive Int that the user entered.
-Validates the negative Int that the user entered.
-Validates the Int that the user entered with a minimum imposed.
-Validates the Int that the user entered with a maximum imposed.
-Validates the Int that the user entered with an interval imposed.
 """
 
 """
@@ -203,3 +196,4 @@ def ValidateFloatInsideInterval(p_question:str, p_minimum:float, p_maximum:float
             print("***Enter a number between {} and {} you dangus".format(p_minimum,p_maximum))
         else:
             return number
+
