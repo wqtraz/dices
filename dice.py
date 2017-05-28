@@ -10,7 +10,7 @@ The score function rolls multiple scores.
 """
 
 from random import randint
-def roll(n, sides, modifier):
+def roll(n, sides, modifier=0):
     """
     Roll multiple dice and return a list of ints.
     
@@ -22,7 +22,7 @@ def roll(n, sides, modifier):
     return list(int(randint(1, sides) + modifier) for _ in range(n))
 
 
-def sroll(n, sides, modifier):
+def sroll(n, sides, modifier=0):
     """
     Add dice rolls together and return an int.
     
@@ -34,24 +34,26 @@ def sroll(n, sides, modifier):
     return sum(roll(n, sides, modifier))
 
 
-def adv(sides):
+def adv(sides, modifier=0):
     """
     Roll two multi-faced dice and drop the lowest, returning an int.
     
     Keyword argument:
     sides -- number of sides on the dice
+    modifier -- number added to each die after rolled
     """
-    return max(roll(2, sides, 0))
+    return max(roll(2, sides, modifier))
 
 
-def dis(sides):
+def dis(sides, modifier=0):
     """
     Roll two multi-faced dice and drop the highest, returning an int.
     
     Keyword argument:
     sides -- number of sides on the dice
+    modifier -- number added to each die after rolled
     """
-    return min(roll(2, sides, 0))
+    return min(roll(2, sides, modifier))
 
 
 def _score():
