@@ -18,7 +18,9 @@ def roll(n, sides, modifier):
 =======
 def roll(n, sides, modifier=0):
 >>>>>>> master
+=======
 def roll(n, sides, modifier=0):
+>>>>>>> 9513ca2d6bfc5818eca00b2fe50ff7833c377b07
     """
     Roll multiple dice and return a list of ints.
     
