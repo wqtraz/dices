@@ -6,7 +6,7 @@ Validate what the user entered and handle exceptions.
 INT validators.
 """
 
-def ValidateInt(p_question:str):
+def Int(p_question:str):
     """
     Validates the Int that the user entered.
 
@@ -21,7 +21,7 @@ def ValidateInt(p_question:str):
             print("***Enter a number without decimals you dangus")
 
 
-def ValidatePositiveInt(p_question:str):
+def PositiveInt(p_question:str):
     """
     Validates the positive Int that the user entered.
 
@@ -36,7 +36,7 @@ def ValidatePositiveInt(p_question:str):
             return number
 
 
-def ValidateNegativeInt(p_question:str):
+def NegativeInt(p_question:str):
     """
     Validates the negative Int that the user entered.
 
@@ -51,7 +51,7 @@ def ValidateNegativeInt(p_question:str):
             return number
 
 
-def ValidateIntWithMinimum(p_question:str, p_minimum:int):
+def IntWithMinimum(p_question:str, p_minimum:int):
     """
     Validates the Int that the user entered with a minimum imposed.
 
@@ -67,7 +67,7 @@ def ValidateIntWithMinimum(p_question:str, p_minimum:int):
             return number
 
 
-def ValidateIntWithMaximum(p_question:str, p_maximum:int):
+def IntWithMaximum(p_question:str, p_maximum:int):
     """
     Validates the Int that the user entered with a maximum imposed.
 
@@ -83,7 +83,7 @@ def ValidateIntWithMaximum(p_question:str, p_maximum:int):
             return number
 
 
-def ValidateIntInsideInterval(p_question:str, p_minimum:int, p_maximum:int):
+def IntInsideInterval(p_question:str, p_minimum:int, p_maximum:int):
     """
     Validates the Int that the user entered with an interval imposed.
 
@@ -104,7 +104,7 @@ def ValidateIntInsideInterval(p_question:str, p_minimum:int, p_maximum:int):
 FLOAT validators.
 """
 
-def ValidateFloat(p_question:str):
+def Float(p_question:str):
     """
     Validates the Float that the user entered.
 
@@ -119,7 +119,7 @@ def ValidateFloat(p_question:str):
             print("***Enter a number you dangus")
 
 
-def ValidatePositiveFloat(p_question:str):
+def PositiveFloat(p_question:str):
     """
     Validates the positive Float that the user entered.
 
@@ -134,7 +134,7 @@ def ValidatePositiveFloat(p_question:str):
             return number
 
 
-def ValidateNegativefloat(p_question:str):
+def Negativefloat(p_question:str):
     """
     Validates the negative Float that the user entered.
 
@@ -149,7 +149,7 @@ def ValidateNegativefloat(p_question:str):
             return number
 
 
-def ValidateFloatWithMinimum(p_question:str, p_minimum:float):
+def FloatWithMinimum(p_question:str, p_minimum:float):
     """
     Validates the Float that the user entered with a minimum imposed.
 
@@ -165,7 +165,7 @@ def ValidateFloatWithMinimum(p_question:str, p_minimum:float):
             return number
 
 
-def ValidateFloatWithMaximum(p_question:str, p_maximum:float):
+def FloatWithMaximum(p_question:str, p_maximum:float):
     """
     Validates the Float that the user entered with a maximum imposed.
 
@@ -181,7 +181,7 @@ def ValidateFloatWithMaximum(p_question:str, p_maximum:float):
             return number
 
 
-def ValidateFloatInsideInterval(p_question:str, p_minimum:float, p_maximum:float):
+def FloatInsideInterval(p_question:str, p_minimum:float, p_maximum:float):
     """
     Validates the Float that the user entered with an interval imposed.
 
