@@ -9,15 +9,11 @@ The _score function rolls a 4d6r1k3 score.
 The score function rolls multiple scores.
 """
 
+
 from random import randint
-<<<<<<< HEAD
 from util import validation, special
 
-<<<<<<< HEAD
-def roll(n, sides, modifier):
-=======
-def roll(n, sides, modifier=0):
->>>>>>> master
+
 def roll(n, sides, modifier=0):
     """
     Roll multiple dice and return a list of ints.
