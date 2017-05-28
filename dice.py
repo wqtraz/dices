@@ -11,7 +11,7 @@ The score function rolls multiple scores.
 
 
 from random import randint
-from util import validate, special
+from util import validate as val, special as spe
 
 
 def roll(n, sides, modifier=0):
@@ -82,8 +82,76 @@ def score(n):
     return list(_score() for _ in range(n))
 
 
-nombreInt = validate.IntInsideInterval("Enter a number : ", 4, 8)
-print(nombreInt)
-nombreFloat = validate.FloatInsideInterval("Enter a number : ", 4.65 , 8.99)
-print(nombreFloat)
-special.Wait("Press Enter to exit...")
+
+n = 1
+sides = 1
+modifier = 0
+
+while True:
+    choice = val.IntInsideInterval(
+"""1 - roll
+2 - sroll
+3 - adv
+4 - dis
+5 - score
+6 - _score
+0 - Exit
+Pick an option : """, 0, 6)
+
+    spe.DrawLine(5)
+
+    if (choice == 1):
+        print("Roll command:")
+        n = val.PositiveInt("Enter the number of dice : ")
+        sides = val.PositiveInt("Enter the number of sides : ")
+        modifier = val.Int("Enter the modifier : ")
+        result = roll(n, sides, modifier)
+        print("RESULT : ",result)
+    elif (choice == 2):
+        print("Sroll command:")
+        n = val.PositiveInt("Enter the number of dice : ")
+        sides = val.PositiveInt("Enter the number of sides : ")
+        modifier = val.Int("Enter the modifier : ")
+        result = sroll(n, sides, modifier)
+        print("RESULT : ",result)
+    elif (choice == 3):
+        print("Adv command:")
+        sides = val.PositiveInt("Enter the number of sides : ")
+        modifier = val.Int("Enter the modifier : ")
+        result = adv(sides, modifier)
+        print("RESULT : ",result)
+    elif (choice == 4):
+        print("Dis command:")
+        sides = val.PositiveInt("Enter the number of sides : ")
+        modifier = val.Int("Enter the modifier : ")
+        result = dis(sides, modifier)
+        print("RESULT : ",result)
+    elif (choice == 5):
+        print("_Score command:")
+        result = _score()
+        print("RESULT : ",result)
+    elif (choice == 6):
+        print("Score command:")
+        n = val.PositiveInt("Enter the number of ability score needed : ")
+        result = score(n)
+        print("RESULT : ",result)
+    elif (choice == 0):
+        break
+    else:
+        print("***Impossible to get here.")
+
+    spe.DrawLine(5)
+
+spe.DrawLine(10)
+spe.Wait("Press Enter to close...")
+
+
+#    choice = spe.MenuWithBrackets(
+#"""[R] - roll
+#[O] - sroll
+#[A] - adv
+#[D] - dis
+#[S] - score
+#[C] - _score
+#[E] - Exit
+#Pick an option : """)
