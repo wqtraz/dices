@@ -139,7 +139,6 @@ Pick an option : """, 0, 5)
     spe.Wait("Continue ->")
     clear()
 
-spe.DrawLine(10)
 spe.Wait("Press Enter to close...")
 
 
