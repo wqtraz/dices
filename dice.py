@@ -9,8 +9,10 @@ The _score function rolls a 4d6r1k3 score.
 The score function rolls multiple scores.
 """
 
+
 from random import randint
 from util import validate, special
+
 
 def roll(n, sides, modifier=0):
     """
