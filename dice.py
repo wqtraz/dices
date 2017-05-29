@@ -77,3 +77,47 @@ def score(n):
     """
     return list(_score() for _ in range(n))
 
+def ValidateInt(p_question:str):
+    """
+    Validates the Int that the user entered.
+
+    Keyword arguments:
+    p_question -- question posed to the user
+    """
+    while True:
+        try:
+            number = int(input(p_question))
+            return number
+        except ValueError:
+            print("***Enter a number without decimals you dangus")
+
+def ValidatePositiveInt(p_question:str):
+    """
+    Validates the positive Int that the user entered.
+
+    Keyword arguments:
+    p_question -- question posed to the user
+    """
+    while True:
+        number = ValidateInt(p_question)
+        if (number < 0):
+            print("***Enter a positive number you dangus")
+        else:
+            return number
+
+def ValidateNegativeInt(p_question:str):
+    """
+    Validates the negative Int that the user entered.
+
+    Keyword arguments:
+    p_question -- question posed to the user
+    """
+    while True:
+        number = ValidateInt(p_question)
+        if (number > 0):
+            print("***Enter a negative number you dangus")
+        else:
+            return number
+
+nombre = ValidateInt("Enter a number : ")
+print(nombre)
