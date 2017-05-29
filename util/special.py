@@ -6,7 +6,7 @@ Special functions.
 from util import validate as val
 
 
-def Wait(p_question:str):
+def Wait(p_question: str):
     """
     Waits for input from the user, usually used before closing a console program.
 
@@ -17,7 +17,7 @@ def Wait(p_question:str):
     return
 
 
-def DrawLine(p_length:int):
+def DrawLine(p_length: int):
     """
     Draws a line made of -, with custom length.
 
@@ -28,7 +28,7 @@ def DrawLine(p_length:int):
     return
 
 
-def MenuWithBrackets(p_question:str):
+def MenuWithBrackets(p_question: str):
     """
     Detects the characters between brackets in the p_question and validates
     the character that the user entered.

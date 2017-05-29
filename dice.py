@@ -88,6 +88,9 @@ sides = 1
 modifier = 0
 clear = lambda: os.system('cls') # You can use clear() to clear the console of all text
 
+
+
+
 while True:
     choice = val.IntInsideInterval(
 """1 - Roll dice
@@ -105,32 +108,27 @@ Pick an option : """, 0, 5)
         n = val.PositiveInt("Enter the number of dice : ")
         sides = val.PositiveInt("Enter the number of sides : ")
         modifier = val.Int("Enter the modifier : ")
-        result = roll(n, sides, modifier)
-        print("RESULT : ",result)
+        print("RESULT : ", roll(n, sides, modifier))
     elif (choice == 2):
         print("Sum roll command:")
         n = val.PositiveInt("Enter the number of dice : ")
         sides = val.PositiveInt("Enter the number of sides : ")
         modifier = val.Int("Enter the modifier : ")
-        result = sroll(n, sides, modifier)
-        print("RESULT : ",result)
+        print("RESULT : ", sroll(n, sides, modifier))
     elif (choice == 3):
         print("Advantage roll command:")
         sides = val.PositiveInt("Enter the number of sides : ")
         modifier = val.Int("Enter the modifier : ")
-        result = adv(sides, modifier)
-        print("RESULT : ",result)
+        print("RESULT : ", adv(sides, modifier))
     elif (choice == 4):
         print("Disadvantage roll command:")
         sides = val.PositiveInt("Enter the number of sides : ")
         modifier = val.Int("Enter the modifier : ")
-        result = dis(sides, modifier)
-        print("RESULT : ",result)
+        print("RESULT : ", dis(sides, modifier))
     elif (choice == 5):
         print("Ability score roll command:")
         n = val.PositiveInt("Enter the number of ability score needed : ")
-        result = score(n)
-        print("RESULT : ",result)
+        print("RESULT : ", score(n))
     elif (choice == 0):
         break
     else:
