@@ -9,7 +9,11 @@ The _score function rolls a 4d6r1k3 score.
 The score function rolls multiple scores.
 """
 
+
 from random import randint
+from util import validate as val, special as spe
+import os
+
 def roll(n, sides, modifier=0):
     """
     Roll multiple dice and return a list of ints.
@@ -76,4 +80,65 @@ def score(n):
     n -- number of ability scores rolled
     """
     return list(_score() for _ in range(n))
+
+
+
+n = 1
+sides = 1
+modifier = 0
+clear = lambda: os.system('cls') # You can use clear() to clear the console of all text
+
+while True:
+    choice = val.IntInsideInterval(
+"""1 - Roll dice
+2 - Sum roll
+3 - Advantage roll
+4 - Disaventage roll
+5 - Ability score roll
+0 - Exit
+Pick an option : """, 0, 5)
+
+    spe.DrawLine(5)
+
+    if (choice == 1):
+        print("Roll dice command:")
+        n = val.PositiveInt("Enter the number of dice : ")
+        sides = val.PositiveInt("Enter the number of sides : ")
+        modifier = val.Int("Enter the modifier : ")
+        result = roll(n, sides, modifier)
+        print("RESULT : ",result)
+    elif (choice == 2):
+        print("Sum roll command:")
+        n = val.PositiveInt("Enter the number of dice : ")
+        sides = val.PositiveInt("Enter the number of sides : ")
+        modifier = val.Int("Enter the modifier : ")
+        result = sroll(n, sides, modifier)
+        print("RESULT : ",result)
+    elif (choice == 3):
+        print("Advantage roll command:")
+        sides = val.PositiveInt("Enter the number of sides : ")
+        modifier = val.Int("Enter the modifier : ")
+        result = adv(sides, modifier)
+        print("RESULT : ",result)
+    elif (choice == 4):
+        print("Disaventage roll command:")
+        sides = val.PositiveInt("Enter the number of sides : ")
+        modifier = val.Int("Enter the modifier : ")
+        result = dis(sides, modifier)
+        print("RESULT : ",result)
+    elif (choice == 5):
+        print("Ability score roll command:")
+        n = val.PositiveInt("Enter the number of ability score needed : ")
+        result = score(n)
+        print("RESULT : ",result)
+    elif (choice == 0):
+        break
+    else:
+        print("***Impossible to get here.")
+
+    spe.Wait("Continue ->")
+    clear()
+
+spe.Wait("Press Enter to close...")
+
 
