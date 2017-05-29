@@ -93,7 +93,7 @@ while True:
 """1 - Roll dice
 2 - Sum roll
 3 - Advantage roll
-4 - Disaventage roll
+4 - Disadventage roll
 5 - Ability score roll
 0 - Exit
 Pick an option : """, 0, 5)
@@ -105,36 +105,31 @@ Pick an option : """, 0, 5)
         n = val.PositiveInt("Enter the number of dice : ")
         sides = val.PositiveInt("Enter the number of sides : ")
         modifier = val.Int("Enter the modifier : ")
-        result = roll(n, sides, modifier)
-        print("RESULT : ",result)
+        print("RESULT : ", roll(n, sides, modifier))
     elif (choice == 2):
         print("Sum roll command:")
         n = val.PositiveInt("Enter the number of dice : ")
         sides = val.PositiveInt("Enter the number of sides : ")
         modifier = val.Int("Enter the modifier : ")
-        result = sroll(n, sides, modifier)
-        print("RESULT : ",result)
+        print("RESULT : ", sroll(n, sides, modifier))
     elif (choice == 3):
         print("Advantage roll command:")
         sides = val.PositiveInt("Enter the number of sides : ")
         modifier = val.Int("Enter the modifier : ")
-        result = adv(sides, modifier)
-        print("RESULT : ",result)
+        print("RESULT : ", adv(sides, modifier))
     elif (choice == 4):
         print("Disadvantage roll command:")
         sides = val.PositiveInt("Enter the number of sides : ")
         modifier = val.Int("Enter the modifier : ")
-        result = dis(sides, modifier)
-        print("RESULT : ",result)
+        print("RESULT : ", dis(sides, modifier))
     elif (choice == 5):
         print("Ability score roll command:")
         n = val.PositiveInt("Enter the number of ability score needed : ")
-        result = score(n)
-        print("RESULT : ",result)
+        print("RESULT : ", score(n))
     elif (choice == 0):
         break
     else:
-        print("***Impossible to get here.")
+        print("***Not supposed to be here.")
 
     spe.Wait("Continue ->")
     clear()
