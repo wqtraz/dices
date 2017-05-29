@@ -14,7 +14,7 @@ from random import randint
 from util import validate as val, special as spe
 import os
 
-def roll(n, sides, modifier=0):
+def roll(n: int, sides: int, modifier: int = 0):
     """
     Roll multiple dice and return a list of ints.
     
@@ -23,10 +23,10 @@ def roll(n, sides, modifier=0):
     sides -- number of sides on the dice
     modifier -- number added to each die after rolled
     """
-    return list(int(randint(1, sides) + modifier) for _ in range(n))
+    return list((randint(1, sides) + modifier) for _ in range(n))
 
 
-def sroll(n, sides, modifier=0):
+def sroll(n: int, sides: int, modifier: int = 0):
     """
     Add dice rolls together and return an int.
     
@@ -35,10 +35,10 @@ def sroll(n, sides, modifier=0):
     sides -- number of sides on the dice
     modifier -- number added to each die after rolled
     """
-    return sum(roll(n, sides, modifier))
+    return (sum(roll(n, sides, 0)) + modifier)
 
 
-def adv(sides, modifier=0):
+def adv(sides: int, modifier: int = 0):
     """
     Roll two multi-faced dice and drop the lowest, returning an int.
     
@@ -49,7 +49,7 @@ def adv(sides, modifier=0):
     return max(roll(2, sides, modifier))
 
 
-def dis(sides, modifier=0):
+def dis(sides: int, modifier: int = 0):
     """
     Roll two multi-faced dice and drop the highest, returning an int.
     
@@ -72,7 +72,7 @@ def _score():
     return sum(score_roll)
 
 
-def score(n):
+def score(n: int):
     """
     Roll multiple ability scores by rolling 4d6r1k3 and return a list.
     
@@ -121,7 +121,7 @@ Pick an option : """, 0, 5)
         result = adv(sides, modifier)
         print("RESULT : ",result)
     elif (choice == 4):
-        print("Disaventage roll command:")
+        print("Disadvantage roll command:")
         sides = val.PositiveInt("Enter the number of sides : ")
         modifier = val.Int("Enter the modifier : ")
         result = dis(sides, modifier)
