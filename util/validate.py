@@ -6,7 +6,7 @@ Validate what the user entered and handle exceptions.
 INT validators.
 """
 
-def Int(p_question:str):
+def Int(p_question: str):
     """
     Validates the Int that the user entered.
 
@@ -21,7 +21,7 @@ def Int(p_question:str):
             print("***Enter a number without decimals you dangus.")
 
 
-def PositiveInt(p_question:str):
+def PositiveInt(p_question: str):
     """
     Validates the positive Int that the user entered.
     0 isn't counted as a positive number.
@@ -37,7 +37,7 @@ def PositiveInt(p_question:str):
             return number
 
 
-def NegativeInt(p_question:str):
+def NegativeInt(p_question: str):
     """
     Validates the negative Int that the user entered.
 
@@ -52,7 +52,7 @@ def NegativeInt(p_question:str):
             return number
 
 
-def IntWithMinimum(p_question:str, p_minimum:int):
+def IntWithMinimum(p_question: str, p_minimum: int):
     """
     Validates the Int that the user entered with a minimum imposed.
 
@@ -68,7 +68,7 @@ def IntWithMinimum(p_question:str, p_minimum:int):
             return number
 
 
-def IntWithMaximum(p_question:str, p_maximum:int):
+def IntWithMaximum(p_question: str, p_maximum: int):
     """
     Validates the Int that the user entered with a maximum imposed.
 
@@ -84,7 +84,7 @@ def IntWithMaximum(p_question:str, p_maximum:int):
             return number
 
 
-def IntInsideInterval(p_question:str, p_minimum:int, p_maximum:int):
+def IntInsideInterval(p_question: str, p_minimum: int, p_maximum: int):
     """
     Validates the Int that the user entered with an interval imposed.
 
@@ -105,7 +105,7 @@ def IntInsideInterval(p_question:str, p_minimum:int, p_maximum:int):
 FLOAT validators.
 """
 
-def Float(p_question:str):
+def Float(p_question: str):
     """
     Validates the Float that the user entered.
 
@@ -120,7 +120,7 @@ def Float(p_question:str):
             print("***Enter a number you dangus.")
 
 
-def PositiveFloat(p_question:str):
+def PositiveFloat(p_question: str):
     """
     Validates the positive Float that the user entered.
 
@@ -135,7 +135,7 @@ def PositiveFloat(p_question:str):
             return number
 
 
-def Negativefloat(p_question:str):
+def Negativefloat(p_question: str):
     """
     Validates the negative Float that the user entered.
 
@@ -150,7 +150,7 @@ def Negativefloat(p_question:str):
             return number
 
 
-def FloatWithMinimum(p_question:str, p_minimum:float):
+def FloatWithMinimum(p_question: str, p_minimum: float):
     """
     Validates the Float that the user entered with a minimum imposed.
 
@@ -166,7 +166,7 @@ def FloatWithMinimum(p_question:str, p_minimum:float):
             return number
 
 
-def FloatWithMaximum(p_question:str, p_maximum:float):
+def FloatWithMaximum(p_question: str, p_maximum: float):
     """
     Validates the Float that the user entered with a maximum imposed.
 
@@ -182,7 +182,7 @@ def FloatWithMaximum(p_question:str, p_maximum:float):
             return number
 
 
-def FloatInsideInterval(p_question:str, p_minimum:float, p_maximum:float):
+def FloatInsideInterval(p_question: str, p_minimum: float, p_maximum: float):
     """
     Validates the Float that the user entered with an interval imposed.
 
@@ -203,7 +203,7 @@ def FloatInsideInterval(p_question:str, p_minimum:float, p_maximum:float):
 STRING validators.
 """
 
-def String(p_question:str):
+def String(p_question: str):
     """
     Validates the String that the user entered.
 
@@ -219,7 +219,7 @@ def String(p_question:str):
             print("***Enter normal characters you dangus.")
 
 
-def StringTrim(p_question:str):
+def StringTrim(p_question: str):
     """
     Trims the validated String that the user entered.
 
@@ -229,7 +229,7 @@ def StringTrim(p_question:str):
     text = (String(p_question)).strip()
     return text
 
-def Char(p_question:str):
+def Char(p_question: str):
     """
     Validates the Character that the user entered.
 
