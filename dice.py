@@ -14,6 +14,34 @@ from random import randint
 from util import validate as val, special as spe
 import os
 
+
+class Initiative:
+    playerCount = 0
+
+    def __init__(self, player, initiativeNb):
+        self.player = player
+        self.initiativeNb = initiativeNb
+        Initiative.playerCount += 1
+
+    def PC(self):
+        """
+        Returns the player count
+        """
+        return Initiative.playerCount
+
+    def DisplayPC(self):
+        """
+        Displays the player count
+        """
+        print("Number of players on this tracker: ", Initiative.playerCount)
+
+    def DisplayInitiative(self):
+        """
+        Displays the name and initiative of ?every player?
+        """
+        print("Player : {}\nInitiative : {}".format(self.player, self.initiativeNb))
+
+
 def roll(n: int, sides: int, modifier: int = 0):
     """
     Roll multiple dice and return a list of ints.
@@ -82,14 +110,10 @@ def score(n: int):
     return list(_score() for _ in range(n))
 
 
-
 n = 1
 sides = 1
 modifier = 0
 clear = lambda: os.system('cls') # You can use clear() to clear the console of all text
-
-
-
 
 while True:
     choice = val.IntInsideInterval(
