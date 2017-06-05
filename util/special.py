@@ -17,14 +17,15 @@ def Wait(p_question: str):
     return
 
 
-def DrawLine(p_length: int):
+def DrawLine(p_length: int, character: str):
     """
-    Draws a line made of -, with custom length.
+    Draws a line made of any character, with custom length.
 
     Keyword arguments:
     p_length -- length of the line
+    character -- character of the line
     """
-    print('-' * p_length)
+    print(character * p_length)
     return
 
 

@@ -17,35 +17,40 @@ import os
 
 clear = lambda: os.system('cls') # You can use clear() to clear the console of all text
 
-class Initiative:
-    playerList = []
-    playerCount = 0
-
-    def __init__(self, player, initiativeNb):
-        self.player = player
+class Initiative(list):
+    def __init__(self, name, initiativeNb):
+        self.name = name
         self.initiativeNb = initiativeNb
-        Initiative.playerCount += 1
 
 
-    def DisplayPlayerCount(self):
-        """
-        Displays the player count.
-        """
-        print("Number of players on this tracker: ", Initiative.playerCount)
+m_playerList = []
+m_playerCombo = Initiative("", 0)
+
+def DisplayRemovePlayer():
+    """
+    Displays the name of every player.
+    """
+    index = -1
+    for player in m_playerList:
+        index += 1
+        print(" {} - Player : {}".format(index, player.name))
+
+def DisplayInitiative():
+    """
+    Displays the name and initiative of every player.
+    """
+    if (len(m_playerList) == 0):
+        print(" None")
+    else:
+        for player in m_playerList:
+            print(" Player : {} -- Initiative : {}".format(player.name, player.initiativeNb))
 
 
-    def DisplayInitiative(self):
-        """
-        Displays the name and initiative of every player.
-        """
-        print("Player : {}\nInitiative : {}".format(self.player, self.initiativeNb))
-
-
-    def DisplayPlayer(self):
-        """
-        Displays player names.
-        """
-
+def DisplayPlayerCount():
+    """
+    Displays the player count.
+    """
+    print("Number of players in the Initiative Tracker :", len(m_playerList))
 
 def roll(n: int, sides: int, modifier: int = 0):
     """
@@ -120,20 +125,54 @@ def InitiativeTracker():
     Sub-Menu for the Initiative Tracker
     """
     while True:
+        print("Initiative Tracker:")
         subChoice = val.IntInsideInterval(
-    """1 - 
+"""1 - Add a Player
+2 - Remove a Player
+3 - Display Player Count
+4 - Display Initiative
+0 - Return
+Pick an option : """, 0, 4)
 
-    """, 0, 2)
+        spe.DrawLine(8, '-')
 
+        if (subChoice == 1):
+            print("Add a Player:")
+            playerName = val.StringTrim("Enter the player's name : ")
+            playerInitiative = val.Int("Enter the player's initiative : ")
+            m_playerCombo = Initiative(playerName, playerInitiative)
+            m_playerList.append(m_playerCombo)
+        elif (subChoice == 2):
+            print("Remove a Player:")
+            if (len(m_playerList) == 0):
+                print("There's no player in the Tracker")
+            else:
+                DisplayRemovePlayer()
+                removeIndex = val.IntInsideInterval("Pick a number to remove a player : ", 0, len(m_playerList)-1)
+                del m_playerList[removeIndex]
+        elif (subChoice == 3):
+            print("Display Player Count:")
+            DisplayPlayerCount()
+        elif (subChoice == 4):
+            print("Display Initiative:")
+            DisplayInitiative()
+        elif (subChoice == 0):
+            break
+        else:
+            print("***Bypassed Sub-Menu restrictions.")
 
-
-
-    print("Initiative Tracker:")
-    playerName = val.StringTrim("Enter the player's name : ")
-    playerInitiative = val.Int("Enter the player's initiative :")
-    playerCombo = Initiative(playerName, playerInitiative)
-    playerCombo.DisplayInitiative()
-
+        spe.Wait("Continue ->")
+        clear()
+        print(
+"""1 - Roll dice
+2 - Sum roll
+3 - Advantage roll
+4 - Disaventage roll
+5 - Ability score roll
+6 - Initiative Tracker
+0 - Exit
+Pick an option : 6""")
+        spe.DrawLine(5, '-')
 
 
 while True:
@@ -147,7 +186,7 @@ while True:
 0 - Exit
 Pick an option : """, 0, 6)
 
-    spe.DrawLine(5)
+    spe.DrawLine(5, '-')
 
     if (choice == 1):
         print("Roll dice:")
@@ -155,34 +194,38 @@ Pick an option : """, 0, 6)
         sides = val.PositiveInt("Enter the number of sides : ")
         modifier = val.Int("Enter the modifier : ")
         print("RESULT : ", roll(n, sides, modifier))
+        spe.Wait("Continue ->")
     elif (choice == 2):
         print("Sum roll:")
         n = val.PositiveInt("Enter the number of dice : ")
         sides = val.PositiveInt("Enter the number of sides : ")
         modifier = val.Int("Enter the modifier : ")
         print("RESULT : ", sroll(n, sides, modifier))
+        spe.Wait("Continue ->")
     elif (choice == 3):
         print("Advantage roll:")
         sides = val.PositiveInt("Enter the number of sides : ")
         modifier = val.Int("Enter the modifier : ")
         print("RESULT : ", adv(sides, modifier))
+        spe.Wait("Continue ->")
     elif (choice == 4):
         print("Disadvantage roll:")
         sides = val.PositiveInt("Enter the number of sides : ")
         modifier = val.Int("Enter the modifier : ")
         print("RESULT : ", dis(sides, modifier))
+        spe.Wait("Continue ->")
     elif (choice == 5):
         print("Ability score roll:")
         n = val.PositiveInt("Enter the number of ability score needed : ")
         print("RESULT : ", score(n))
+        spe.Wait("Continue ->")
     elif (choice == 6):
         InitiativeTracker()
     elif (choice == 0):
         break
     else:
-        print("***Impossible to get here.")
+        print("***Bypassed Menu restrictions.")
 
-    spe.Wait("Continue ->")
     clear()
 
 spe.Wait("Press Enter to close...")
