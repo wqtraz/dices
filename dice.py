@@ -10,6 +10,7 @@ The score function rolls multiple scores.
 """
 
 
+from operator import attrgetter
 from random import randint
 from util import validate as val, special as spe
 import os
@@ -18,9 +19,9 @@ import os
 clear = lambda: os.system('cls') # You can use clear() to clear the console of all text
 
 class Initiative(list):
-    def __init__(self, name, initiativeNb):
-        self.name = name
+    def __init__(self, initiativeNb, name):
         self.initiativeNb = initiativeNb
+        self.name = name
 
 
 m_playerList = []
@@ -140,8 +141,9 @@ Pick an option : """, 0, 4)
             print("Add a Player:")
             playerName = val.StringTrim("Enter the player's name : ")
             playerInitiative = val.Int("Enter the player's initiative : ")
-            m_playerCombo = Initiative(playerName, playerInitiative)
+            m_playerCombo = Initiative(playerInitiative, playerName)
             m_playerList.append(m_playerCombo)
+            m_playerList.sort(key=attrgetter('initiativeNb'), reverse=True) # Sort by initiative
         elif (subChoice == 2):
             print("Remove a Player:")
             if (len(m_playerList) == 0):
