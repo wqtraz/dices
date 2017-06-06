@@ -23,35 +23,51 @@ class Initiative(list):
         self.initiativeNb = initiativeNb
         self.name = name
 
-
-m_playerList = []
+m_playerList = [] # The list that will have all the information about players and initiative
 m_playerCombo = Initiative("", 0)
 
-def DisplayRemovePlayer():
+def RemovePlayer():
     """
-    Displays the name of every player.
-    """
-    index = -1
-    for player in m_playerList:
-        index += 1
-        print(" {} - Player : {}".format(index, player.name))
-
-def DisplayInitiative():
-    """
-    Displays the name and initiative of every player.
+    One option from the Initiative Tracker.
+    Let's the user remove a player from the list.
     """
     if (len(m_playerList) == 0):
+        print("There's no one to remove")
+    else:
+        index = -1
+        for player in m_playerList:
+            index += 1
+            print(" {} - Player : {}".format(index, player.name))
+        removeIndex = val.IntInsideInterval("Pick a number to remove a player : ", 0, len(m_playerList)-1)
+        del m_playerList[removeIndex]
+
+
+def AddPlayer():
+    """
+    One option from the Initiative Tracker.
+    Let's the user add a player to the list.
+    """
+    playerName = val.StringTrim("Enter the player's name : ")
+    playerInitiative = val.Int("Enter the player's initiative : ")
+    m_playerCombo = Initiative(playerInitiative, playerName)
+    m_playerList.append(m_playerCombo)
+    m_playerList.sort(key=attrgetter('initiativeNb'), reverse=True) # Sort by initiative
+
+
+def DisplayPlayerList(p_list: list):
+    """
+    Displays the player count and the player list.
+
+    Keyword arguments:
+    p_list -- a list made out of Initiative()
+    """
+    print("Number of players :", len(p_list))
+    if (len(p_list) == 0):
         print(" None")
     else:
-        for player in m_playerList:
+        for player in p_list:
             print(" Player : {} -- Initiative : {}".format(player.name, player.initiativeNb))
 
-
-def DisplayPlayerCount():
-    """
-    Displays the player count.
-    """
-    print("Number of players in the Initiative Tracker :", len(m_playerList))
 
 def roll(n: int, sides: int, modifier: int = 0):
     """
@@ -121,17 +137,37 @@ def score(n: int):
     return list(_score() for _ in range(n))
 
 
+def InitiativeCycling():
+    """
+
+    """
+    if (len(m_playerList) < 2):
+        print("Not enough players to start.")
+    else:
+        listCycling = m_playerList
+        while True:
+            clear()
+            print("Press [ENTER] to continue the cycle\nor type [exit] to stop it.")
+            print("Start Initiative Cycling:")
+            DisplayPlayerList(listCycling)
+            listCycling = spe.RotateList(listCycling, 1)
+            exit = val.String("-> ")
+            if (exit.lower() == "exit"):
+                break
+
+
 def InitiativeTracker():
     """
     Sub-Menu for the Initiative Tracker
     """
     while True:
+        clear()
         print("Initiative Tracker:")
         subChoice = val.IntInsideInterval(
 """1 - Add a Player
 2 - Remove a Player
-3 - Display Player Count
-4 - Display Initiative
+3 - Display Player List
+4 - Start Initiative Cycling
 0 - Return
 Pick an option : """, 0, 4)
 
@@ -139,45 +175,27 @@ Pick an option : """, 0, 4)
 
         if (subChoice == 1):
             print("Add a Player:")
-            playerName = val.StringTrim("Enter the player's name : ")
-            playerInitiative = val.Int("Enter the player's initiative : ")
-            m_playerCombo = Initiative(playerInitiative, playerName)
-            m_playerList.append(m_playerCombo)
-            m_playerList.sort(key=attrgetter('initiativeNb'), reverse=True) # Sort by initiative
+            AddPlayer()
+            spe.Wait("Continue -> ")
         elif (subChoice == 2):
             print("Remove a Player:")
-            if (len(m_playerList) == 0):
-                print("There's no player in the Tracker")
-            else:
-                DisplayRemovePlayer()
-                removeIndex = val.IntInsideInterval("Pick a number to remove a player : ", 0, len(m_playerList)-1)
-                del m_playerList[removeIndex]
+            RemovePlayer()
+            spe.Wait("Continue -> ")
         elif (subChoice == 3):
-            print("Display Player Count:")
-            DisplayPlayerCount()
+            print("Display Player List:")
+            DisplayPlayerList(m_playerList)
+            spe.Wait("Continue -> ")
         elif (subChoice == 4):
-            print("Display Initiative:")
-            DisplayInitiative()
+            InitiativeCycling()
         elif (subChoice == 0):
             break
         else:
             print("***Bypassed Sub-Menu restrictions.")
 
-        spe.Wait("Continue ->")
-        clear()
-        print(
-"""1 - Roll dice
-2 - Sum roll
-3 - Advantage roll
-4 - Disaventage roll
-5 - Ability score roll
-6 - Initiative Tracker
-0 - Exit
-Pick an option : 6""")
-        spe.DrawLine(5, '-')
-
 
 while True:
+    clear()
+    print("Main Menu:")
     choice = val.IntInsideInterval(
 """1 - Roll dice
 2 - Sum roll
@@ -196,39 +214,37 @@ Pick an option : """, 0, 6)
         sides = val.PositiveInt("Enter the number of sides : ")
         modifier = val.Int("Enter the modifier : ")
         print("RESULT : ", roll(n, sides, modifier))
-        spe.Wait("Continue ->")
+        spe.Wait("Continue -> ")
     elif (choice == 2):
         print("Sum roll:")
         n = val.PositiveInt("Enter the number of dice : ")
         sides = val.PositiveInt("Enter the number of sides : ")
         modifier = val.Int("Enter the modifier : ")
         print("RESULT : ", sroll(n, sides, modifier))
-        spe.Wait("Continue ->")
+        spe.Wait("Continue -> ")
     elif (choice == 3):
         print("Advantage roll:")
         sides = val.PositiveInt("Enter the number of sides : ")
         modifier = val.Int("Enter the modifier : ")
         print("RESULT : ", adv(sides, modifier))
-        spe.Wait("Continue ->")
+        spe.Wait("Continue -> ")
     elif (choice == 4):
         print("Disadvantage roll:")
         sides = val.PositiveInt("Enter the number of sides : ")
         modifier = val.Int("Enter the modifier : ")
         print("RESULT : ", dis(sides, modifier))
-        spe.Wait("Continue ->")
+        spe.Wait("Continue -> ")
     elif (choice == 5):
         print("Ability score roll:")
         n = val.PositiveInt("Enter the number of ability score needed : ")
         print("RESULT : ", score(n))
-        spe.Wait("Continue ->")
+        spe.Wait("Continue -> ")
     elif (choice == 6):
         InitiativeTracker()
     elif (choice == 0):
         break
     else:
         print("***Bypassed Menu restrictions.")
-
-    clear()
 
 spe.Wait("Press Enter to close...")
 

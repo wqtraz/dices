@@ -17,15 +17,15 @@ def Wait(p_question: str):
     return
 
 
-def DrawLine(p_length: int, character: str):
+def DrawLine(p_length: int, p_character: str):
     """
     Draws a line made of any character, with custom length.
 
     Keyword arguments:
     p_length -- length of the line
-    character -- character of the line
+    p_character -- character of the line
     """
-    print(character * p_length)
+    print(p_character * p_length)
     return
 
 
@@ -53,3 +53,13 @@ def MenuWithBrackets(p_question: str):
         else:
             return character
 
+
+def RotateList(p_l: list, p_n: int):
+    """
+    Rotates a list of n positions
+
+    Keyword arguments:
+    p_l -- a list
+    p_n -- number of rotation
+    """
+    return p_l[p_n:] + p_l[:p_n]
