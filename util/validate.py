@@ -101,6 +101,21 @@ def IntInsideInterval(p_question: str, p_minimum: int, p_maximum: int):
             return number
 
 
+def RepresentsInt(p_s):
+    """
+    Returns True if the value is an int.
+    Returns False if the value is not an int.
+
+    Keyword arguments:
+    p_s -- value we want to test
+    """
+    try: 
+        int(p_s)
+        return True
+    except ValueError:
+        return False
+
+
 """
 FLOAT validators.
 """
