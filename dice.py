@@ -162,21 +162,23 @@ Type [1] to add a player/monster.
 Type [2] to remove a player/monster.""")
             spe.DrawLine(10, "-")
             DisplayPlayerList(p_list)
-            exit = val.String("-> ")
+            exit = val.StringTrim("-> ")
             if (exit.lower() == "exit"):
                 break
-            if (exit == "1"):
+            elif (exit == "1"):
                 clear()
                 print("Add a Player:")
                 AddPlayer(p_list)
                 spe.Wait("Return -> ")
-            if (exit == "2"):
+            elif (exit == "2"):
                 clear()
                 print("Remove a Player:")
                 RemovePlayer(p_list)
                 spe.Wait("Return -> ")
-
-            p_list = spe.RotateList(p_list, 1)
+            elif (exit == ""):
+                p_list = spe.RotateList(p_list, 1)
+            else:
+                pass
 
 
 def InitiativeTracker():
