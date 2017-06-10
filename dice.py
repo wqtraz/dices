@@ -15,6 +15,31 @@ from random import randint
 from util import validate as val, special as spe
 import os
 import copy
+import ctypes
+
+
+class bcolors:
+    """
+    A class that lets you use colors in the console.
+
+    HEADER is purple.
+    OKBLUE is dark blue.
+    OKGREEN is green.
+    WARNING is yellow.
+    FAIL is red.
+    ENDC is the normal color. You use this after using any color.
+    BOLD is white.
+    UNDERLINE underlines text.
+    """
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+    # Credits: https://stackoverflow.com/questions/287871/print-in-terminal-with-colors-using-python
 
 
 class Initiative(list):
@@ -25,53 +50,7 @@ class Initiative(list):
 
 m_playerList = [] # The list that will have all the information about players and initiative
 clear = lambda: os.system('cls') # You can use clear() to clear the console of all text
-
-
-def RemovePlayer(p_list: list):
-    """
-    One option from the Initiative Tracker.
-    Let's the user remove a player from the list.
-
-    Keyword arguments:
-    p_list -- a list made out of Initiative()
-    """
-    if (len(p_list) == 0):
-        print("There's no one to remove")
-    else:
-        index = -1
-        for player in p_list:
-            index += 1
-            print(" {} - Player : {} -- Initiative : {}".format(index, player.name, player.initiativeNb))
-        removeIndex = val.IntInsideInterval("Pick a number from the left to remove a player : ", 0, len(p_list)-1)
-        del p_list[removeIndex]
-
-
-def AddPlayer(p_list: list):
-    """
-    One option from the Initiative Tracker.
-    Let's the user add a player to the list.
-
-    Keyword arguments:
-    p_list -- a list made out of Initiative()
-    """
-    playerName = val.StringTrim("Enter the player's name : ")
-    playerInitiative = val.Int("Enter the player's initiative : ")
-    p_list.append(Initiative(playerInitiative, playerName))
-
-
-def DisplayPlayerList(p_list: list):
-    """
-    Displays the player count and the player list.
-
-    Keyword arguments:
-    p_list -- a list made out of Initiative()
-    """
-    print("Number of players :", len(p_list))
-    if (len(p_list) == 0):
-        print(" None")
-    else:
-        for player in p_list:
-            print(" Player : {} -- Initiative : {}".format(player.name, player.initiativeNb))
+ctypes.windll.kernel32.SetConsoleTitleW("Dices (made with Python)")
 
 
 def roll(n: int, sides: int, modifier: int = 0):
@@ -142,6 +121,71 @@ def score(n: int):
     return list(_score() for _ in range(n))
 
 
+def RemovePlayer(p_list: list):
+    """
+    One option from the Initiative Tracker.
+    Let's the user remove a player from the list.
+
+    Keyword arguments:
+    p_list -- a list made out of Initiative()
+    """
+    print("Remove a Player:")
+    if (len(p_list) == 0):
+        print("There's no one to remove")
+    else:
+        index = -1
+        for player in p_list:
+            index += 1
+            print(" {} - Player : {} -- Initiative : {}".format(index, player.name, player.initiativeNb))
+        removeIndex = val.IntInsideInterval("Pick a number from the left to remove a player : ", 0, len(p_list)-1)
+        del p_list[removeIndex]
+
+
+def AddPlayer(p_list: list):
+    """
+    One option from the Initiative Tracker.
+    Let's the user add a player to the list.
+
+    Keyword arguments:
+    p_list -- a list made out of Initiative()
+    """
+    print(
+"""Add a Player:
+1 - Roll Initiative
+2 - Enter Initiative manually""")
+    rollChoice = val.IntInsideInterval("Pick an Option : ", 1, 2)
+    spe.DrawLine(10, "-")
+
+    if (rollChoice == 1):
+        playerName = val.StringTrim("Enter the player's name : ")
+        playerModifier = val.Int("Enter the player's initiative modifier : ")
+        playerInitiative = str(roll(1, 20, playerModifier))
+        playerInitiative = int(playerInitiative[1:len(playerInitiative)-1])
+        print("Initiative :", playerInitiative) # Removing the [] from the result
+        p_list.append(Initiative(playerInitiative, playerName))
+    elif (rollChoice == 2):
+        playerName = val.StringTrim("Enter the player's name : ")
+        playerInitiative = val.Int("Enter the player's initiative : ")
+        p_list.append(Initiative(playerInitiative, playerName))
+    else:
+        print("***Bypassed restrictions.")
+
+
+def DisplayPlayerList(p_list: list):
+    """
+    Displays the player count and the player list.
+
+    Keyword arguments:
+    p_list -- a list made out of Initiative()
+    """
+    print("Number of players :", len(p_list))
+    if (len(p_list) == 0):
+        print(" None")
+    else:
+        for player in p_list:
+            print(" Player : {} -- Initiative : {}".format(player.name, player.initiativeNb))
+
+
 def InitiativeCycling(p_list: list):
     """
     Function for the "Start Initiative Cycling option".
@@ -167,12 +211,10 @@ Type [2] to remove a player/monster.""")
                 break
             elif (exit == "1"):
                 clear()
-                print("Add a Player:")
                 AddPlayer(p_list)
                 spe.Wait("Return -> ")
             elif (exit == "2"):
                 clear()
-                print("Remove a Player:")
                 RemovePlayer(p_list)
                 spe.Wait("Return -> ")
             elif (exit == ""):
@@ -187,25 +229,22 @@ def InitiativeTracker():
     """
     while True:
         clear()
-        print("Initiative Tracker:")
-        subChoice = val.IntInsideInterval(
-"""1 - Add a Player
+        print(
+"""Initiative Tracker:
+1 - Add a Player
 2 - Remove a Player
 3 - Display Player List
 4 - Start Initiative Cycling
-0 - Return
-Pick an option : """, 0, 4)
-
+0 - Return""")
+        subChoice = val.IntInsideInterval("Pick an option : ", 0, 4)
         m_playerList.sort(key=attrgetter('initiativeNb'), reverse=True) # Sort by initiative
 
         if (subChoice == 1):
             clear()
-            print("Add a Player:")
             AddPlayer(m_playerList)
             spe.Wait("Return -> ")
         elif (subChoice == 2):
             clear()
-            print("Remove a Player:")
             RemovePlayer(m_playerList)
             spe.Wait("Return -> ")
         elif (subChoice == 3):
@@ -219,21 +258,21 @@ Pick an option : """, 0, 4)
         elif (subChoice == 0):
             break
         else:
-            print("***Bypassed Sub-Menu restrictions.")
+            print("***Bypassed restrictions.")
 
 
 while True:
     clear()
-    print("Main Menu:")
-    choice = val.IntInsideInterval(
-"""1 - Roll dice
+    print(bcolors.HEADER +
+"""Main Menu:
+1 - Roll dice
 2 - Sum roll
 3 - Advantage roll
 4 - Disaventage roll
 5 - Ability score roll
 6 - Initiative Tracker
-0 - Exit
-Pick an option : """, 0, 6)
+0 - Exit""" + bcolors.ENDC)
+    choice = val.IntInsideInterval("Pick an option : ", 0, 6)
 
     if (choice == 1):
         clear()
@@ -276,7 +315,7 @@ Pick an option : """, 0, 6)
     elif (choice == 0):
         break
     else:
-        print("***Bypassed Menu restrictions.")
+        print("***Bypassed restrictions.")
 
 spe.Wait("Press Enter to close...")
 
