@@ -233,8 +233,9 @@ def InitiativeTracker():
 """Initiative Tracker:
 1 - Add a Player
 2 - Remove a Player
-3 - Display Player List
-4 - Start Initiative Cycling
+3 - Clear Player List
+4 - Display Player List
+5 - Start Initiative Cycling
 0 - Return""")
         subChoice = val.IntInsideInterval("Pick an option : ", 0, 4)
         m_playerList.sort(key=attrgetter('initiativeNb'), reverse=True) # Sort by initiative
@@ -249,10 +250,15 @@ def InitiativeTracker():
             spe.Wait("Return -> ")
         elif (subChoice == 3):
             clear()
+            print("Clear Player List:\nList cleared.")
+            del m_playerList[:] # Deletes everything in the list
+            spe.Wait("Return -> ")
+        elif (subChoice == 4):
+            clear()
             print("Display Player List:")
             DisplayPlayerList(m_playerList)
             spe.Wait("Return -> ")
-        elif (subChoice == 4):
+        elif (subChoice == 5):
             cyclingList = copy.deepcopy(m_playerList)
             InitiativeCycling(cyclingList)
         elif (subChoice == 0):
