@@ -129,7 +129,7 @@ def RemovePlayer(p_list: list):
     Keyword arguments:
     p_list -- a list made out of Initiative()
     """
-    print("Remove a Player:")
+    print(bcolors.HEADER + "Remove a Player:" + bcolors.ENDC)
     if (len(p_list) == 0):
         print("There's no one to remove")
     else:
@@ -150,8 +150,8 @@ def AddPlayer(p_list: list):
     p_list -- a list made out of Initiative()
     """
     print(
-"""Add a Player:
-1 - Roll Initiative
+bcolors.HEADER + """Add a Player:""" + bcolors.ENDC +
+"""1 - Roll Initiative
 2 - Enter Initiative manually""")
     rollChoice = val.IntInsideInterval("Pick an Option : ", 1, 2)
     spe.DrawLine(10, "-")
@@ -193,13 +193,14 @@ def InitiativeCycling(p_list: list):
     """
     if (len(p_list) < 2):
         clear()
-        print("Start Initiative Cycling:\nNot enough players to start.")
+        print(bcolors.HEADER + "Start Initiative Cycling:" + bcolors.ENDC + "\nNot enough players to start.")
         spe.Wait("Return -> ")
     else:
         while True:
             clear()
             print(
-"""Start Initiative Cycling:
+bcolors.HEADER + "Start Initiative Cycling:" + bcolors.ENDC +
+"""
 Press [ENTER] to continue the cycle
 Type [exit] to stop it.
 Type [1] to add a player/monster.
@@ -230,14 +231,15 @@ def InitiativeTracker():
     while True:
         clear()
         print(
-"""Initiative Tracker:
+bcolors.HEADER + "Initiative Tracker:" + bcolors.ENDC +
+"""
 1 - Add a Player
 2 - Remove a Player
 3 - Clear Player List
 4 - Display Player List
 5 - Start Initiative Cycling
 0 - Return""")
-        subChoice = val.IntInsideInterval("Pick an option : ", 0, 4)
+        subChoice = val.IntInsideInterval("Pick an option : ", 0, 5)
         m_playerList.sort(key=attrgetter('initiativeNb'), reverse=True) # Sort by initiative
 
         if (subChoice == 1):
@@ -250,12 +252,12 @@ def InitiativeTracker():
             spe.Wait("Return -> ")
         elif (subChoice == 3):
             clear()
-            print("Clear Player List:\nList cleared.")
+            print(bcolors.HEADER + "Clear Player List:" + bcolors.ENDC + "\nList cleared.")
             del m_playerList[:] # Deletes everything in the list
             spe.Wait("Return -> ")
         elif (subChoice == 4):
             clear()
-            print("Display Player List:")
+            print(bcolors.HEADER + "Display Player List:" + bcolors.ENDC)
             DisplayPlayerList(m_playerList)
             spe.Wait("Return -> ")
         elif (subChoice == 5):
@@ -264,25 +266,26 @@ def InitiativeTracker():
         elif (subChoice == 0):
             break
         else:
-            print("***Bypassed restrictions.")
+            print(bcolors.FAIL + "***Bypassed restrictions." + bcolors.ENDC)
 
 
 while True:
     clear()
-    print(bcolors.HEADER +
-"""Main Menu:
+    print(
+bcolors.HEADER + "Main Menu:" + bcolors.ENDC +
+"""
 1 - Roll dice
 2 - Sum roll
 3 - Advantage roll
 4 - Disaventage roll
 5 - Ability score roll
 6 - Initiative Tracker
-0 - Exit""" + bcolors.ENDC)
+0 - Exit""")
     choice = val.IntInsideInterval("Pick an option : ", 0, 6)
 
     if (choice == 1):
         clear()
-        print("Roll dice:")
+        print(bcolors.HEADER + "Roll dice:" + bcolors.ENDC)
         n = val.PositiveInt("Enter the number of dice : ")
         sides = val.PositiveInt("Enter the number of sides : ")
         modifier = val.Int("Enter the modifier : ")
@@ -290,7 +293,7 @@ while True:
         spe.Wait("Return -> ")
     elif (choice == 2):
         clear()
-        print("Sum roll:")
+        print(bcolors.HEADER + "Sum roll:" + bcolors.ENDC)
         n = val.PositiveInt("Enter the number of dice : ")
         sides = val.PositiveInt("Enter the number of sides : ")
         modifier = val.Int("Enter the modifier : ")
@@ -298,21 +301,21 @@ while True:
         spe.Wait("Return -> ")
     elif (choice == 3):
         clear()
-        print("Advantage roll:")
+        print(bcolors.HEADER + "Advantage roll:" + bcolors.ENDC)
         sides = val.PositiveInt("Enter the number of sides : ")
         modifier = val.Int("Enter the modifier : ")
         print("RESULT : ", adv(sides, modifier))
         spe.Wait("Return -> ")
     elif (choice == 4):
         clear()
-        print("Disadvantage roll:")
+        print(bcolors.HEADER + "Disadvantage roll:" + bcolors.ENDC)
         sides = val.PositiveInt("Enter the number of sides : ")
         modifier = val.Int("Enter the modifier : ")
         print("RESULT : ", dis(sides, modifier))
         spe.Wait("Return -> ")
     elif (choice == 5):
         clear()
-        print("Ability score roll:")
+        print(bcolors.HEADER + "Ability score roll:" + bcolors.ENDC)
         n = val.PositiveInt("Enter the number of ability score needed : ")
         print("RESULT : ", score(n))
         spe.Wait("Return -> ")
@@ -321,7 +324,7 @@ while True:
     elif (choice == 0):
         break
     else:
-        print("***Bypassed restrictions.")
+        print(bcolors.FAIL + "***Bypassed restrictions." + bcolors.ENDC)
 
 spe.Wait("Press Enter to close...")
 
