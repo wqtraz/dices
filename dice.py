@@ -131,7 +131,7 @@ def RemovePlayer(p_list: list):
     """
     print(bcolors.HEADER + "Remove a Player:" + bcolors.ENDC)
     if (len(p_list) == 0):
-        print("There's no one to remove")
+        print(bcolors.WARNING + "There's no one to remove" + bcolors.ENDC)
     else:
         index = -1
         for player in p_list:
@@ -150,8 +150,9 @@ def AddPlayer(p_list: list):
     p_list -- a list made out of Initiative()
     """
     print(
-bcolors.HEADER + """Add a Player:""" + bcolors.ENDC +
-"""1 - Roll Initiative
+bcolors.HEADER + "Add a Player:" + bcolors.ENDC +
+"""
+1 - Roll Initiative
 2 - Enter Initiative manually""")
     rollChoice = val.IntInsideInterval("Pick an Option : ", 1, 2)
     spe.DrawLine(10, "-")
@@ -168,7 +169,7 @@ bcolors.HEADER + """Add a Player:""" + bcolors.ENDC +
         playerInitiative = val.Int("Enter the player's initiative : ")
         p_list.append(Initiative(playerInitiative, playerName))
     else:
-        print("***Bypassed restrictions.")
+        print(bcolors.FAIL + "***Bypassed restrictions." + bcolors.ENDC)
 
 
 def DisplayPlayerList(p_list: list):
@@ -193,7 +194,7 @@ def InitiativeCycling(p_list: list):
     """
     if (len(p_list) < 2):
         clear()
-        print(bcolors.HEADER + "Start Initiative Cycling:" + bcolors.ENDC + "\nNot enough players to start.")
+        print(bcolors.HEADER + "Start Initiative Cycling:" + bcolors.WARNING + "\nNot enough players to start." + bcolors.ENDC)
         spe.Wait("Return -> ")
     else:
         while True:
@@ -252,7 +253,7 @@ bcolors.HEADER + "Initiative Tracker:" + bcolors.ENDC +
             spe.Wait("Return -> ")
         elif (subChoice == 3):
             clear()
-            print(bcolors.HEADER + "Clear Player List:" + bcolors.ENDC + "\nList cleared.")
+            print(bcolors.HEADER + "Clear Player List:" + bcolors.OKGREEN + "\nList cleared." + bcolors.ENDC)
             del m_playerList[:] # Deletes everything in the list
             spe.Wait("Return -> ")
         elif (subChoice == 4):
