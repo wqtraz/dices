@@ -53,6 +53,12 @@ clear = lambda: os.system('cls') # You can use clear() to clear the console of a
 ctypes.windll.kernel32.SetConsoleTitleW("Dices (made with Python)")
 
 
+def About():
+    clear()
+    print(bcolors.HEADER + "About:" + bcolors.ENDC)
+    spe.Wait("Return -> ")
+
+
 def roll(n: int, sides: int, modifier: int = 0):
     """
     Roll multiple dice and return a list of ints.
@@ -270,63 +276,85 @@ bcolors.HEADER + "Initiative Tracker:" + bcolors.ENDC +
             print(bcolors.FAIL + "***Bypassed restrictions." + bcolors.ENDC)
 
 
-while True:
-    clear()
-    print(
-bcolors.HEADER + "Main Menu:" + bcolors.ENDC +
+def DiceRolling():
+    """
+    Sub-Menu for the Dice Rolling
+    """
+    while True:
+        clear()
+        print(
+    bcolors.HEADER + "Dice Rolling:" + bcolors.ENDC +
 """
 1 - Roll dice
 2 - Sum roll
 3 - Advantage roll
 4 - Disaventage roll
 5 - Ability score roll
-6 - Initiative Tracker
+0 - Return""")
+        choice = val.IntInsideInterval("Pick an option : ", 0, 5)
+
+        if (choice == 1):
+            clear()
+            print(bcolors.HEADER + "Roll dice:" + bcolors.ENDC)
+            n = val.PositiveInt("Enter the number of dice : ")
+            sides = val.PositiveInt("Enter the number of sides : ")
+            modifier = val.Int("Enter the modifier : ")
+            print("RESULT : ", roll(n, sides, modifier))
+            spe.Wait("Return -> ")
+        elif (choice == 2):
+            clear()
+            print(bcolors.HEADER + "Sum roll:" + bcolors.ENDC)
+            n = val.PositiveInt("Enter the number of dice : ")
+            sides = val.PositiveInt("Enter the number of sides : ")
+            modifier = val.Int("Enter the modifier : ")
+            print("RESULT : ", sroll(n, sides, modifier))
+            spe.Wait("Return -> ")
+        elif (choice == 3):
+            clear()
+            print(bcolors.HEADER + "Advantage roll:" + bcolors.ENDC)
+            sides = val.PositiveInt("Enter the number of sides : ")
+            modifier = val.Int("Enter the modifier : ")
+            print("RESULT : ", adv(sides, modifier))
+            spe.Wait("Return -> ")
+        elif (choice == 4):
+            clear()
+            print(bcolors.HEADER + "Disadvantage roll:" + bcolors.ENDC)
+            sides = val.PositiveInt("Enter the number of sides : ")
+            modifier = val.Int("Enter the modifier : ")
+            print("RESULT : ", dis(sides, modifier))
+            spe.Wait("Return -> ")
+        elif (choice == 5):
+            clear()
+            print(bcolors.HEADER + "Ability score roll:" + bcolors.ENDC)
+            n = val.PositiveInt("Enter the number of ability score needed : ")
+            print("RESULT : ", score(n))
+            spe.Wait("Return -> ")
+        elif (choice == 0):
+            break
+        else:
+            print(bcolors.FAIL + "***Bypassed restrictions." + bcolors.ENDC)
+
+
+while True:
+    clear()
+    print(
+bcolors.HEADER + "Main Menu:" + bcolors.ENDC +
+"""
+1 - Dice Rolling
+2 - Initiative Tracker
+3 - About
 0 - Exit""")
-    choice = val.IntInsideInterval("Pick an option : ", 0, 6)
+    choice = val.IntInsideInterval("Pick an option : ", 0, 3)
 
     if (choice == 1):
-        clear()
-        print(bcolors.HEADER + "Roll dice:" + bcolors.ENDC)
-        n = val.PositiveInt("Enter the number of dice : ")
-        sides = val.PositiveInt("Enter the number of sides : ")
-        modifier = val.Int("Enter the modifier : ")
-        print("RESULT : ", roll(n, sides, modifier))
-        spe.Wait("Return -> ")
+        DiceRolling()
     elif (choice == 2):
-        clear()
-        print(bcolors.HEADER + "Sum roll:" + bcolors.ENDC)
-        n = val.PositiveInt("Enter the number of dice : ")
-        sides = val.PositiveInt("Enter the number of sides : ")
-        modifier = val.Int("Enter the modifier : ")
-        print("RESULT : ", sroll(n, sides, modifier))
-        spe.Wait("Return -> ")
-    elif (choice == 3):
-        clear()
-        print(bcolors.HEADER + "Advantage roll:" + bcolors.ENDC)
-        sides = val.PositiveInt("Enter the number of sides : ")
-        modifier = val.Int("Enter the modifier : ")
-        print("RESULT : ", adv(sides, modifier))
-        spe.Wait("Return -> ")
-    elif (choice == 4):
-        clear()
-        print(bcolors.HEADER + "Disadvantage roll:" + bcolors.ENDC)
-        sides = val.PositiveInt("Enter the number of sides : ")
-        modifier = val.Int("Enter the modifier : ")
-        print("RESULT : ", dis(sides, modifier))
-        spe.Wait("Return -> ")
-    elif (choice == 5):
-        clear()
-        print(bcolors.HEADER + "Ability score roll:" + bcolors.ENDC)
-        n = val.PositiveInt("Enter the number of ability score needed : ")
-        print("RESULT : ", score(n))
-        spe.Wait("Return -> ")
-    elif (choice == 6):
         InitiativeTracker()
+    elif (choice == 3):
+        About()
     elif (choice == 0):
         break
     else:
         print(bcolors.FAIL + "***Bypassed restrictions." + bcolors.ENDC)
 
 spe.Wait("Press Enter to close...")
-
-
