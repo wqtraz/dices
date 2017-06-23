@@ -55,7 +55,12 @@ ctypes.windll.kernel32.SetConsoleTitleW("Dices (made with Python)")
 
 def About():
     clear()
-    print(bcolors.HEADER + "About:" + bcolors.ENDC)
+    print(bcolors.HEADER + "About:" + bcolors.ENDC + 
+"""
+This program was made by:
+    wqtraz (on GitHub)
+    DAgostinateur (on GitHub)
+""")
     spe.Wait("Return -> ")
 
 
@@ -189,8 +194,13 @@ def DisplayPlayerList(p_list: list):
     if (len(p_list) == 0):
         print(" None")
     else:
+        firstDetector = 0
         for player in p_list:
-            print(" Player : {} -- Initiative : {}".format(player.name, player.initiativeNb))
+            firstDetector += 1
+            if (firstDetector == 1):
+                print(bcolors.OKGREEN + " Player : {} -- Initiative : {}".format(player.name, player.initiativeNb) + bcolors.ENDC)
+            else:
+                print(" Player : {} -- Initiative : {}".format(player.name, player.initiativeNb))
 
 
 def InitiativeCycling(p_list: list):
