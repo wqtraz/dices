@@ -203,89 +203,6 @@ def DisplayPlayerList(p_list: list):
                 print(" Player : {} -- Initiative : {}".format(player.name, player.initiativeNb))
 
 
-def InitiativeCycling(p_list: list):
-    """
-    Function for the "Start Initiative Cycling option".
-    Tells the Game Master who's turn it is.
-    """
-    if (len(p_list) < 2):
-        clear()
-        print(bcolors.HEADER + "Start Initiative Cycling:" + bcolors.WARNING + "\nNot enough players to start." + bcolors.ENDC)
-        spe.Wait("Return -> ")
-    else:
-        while True:
-            clear()
-            print(
-bcolors.HEADER + "Start Initiative Cycling:" + bcolors.ENDC +
-"""
-Press [ENTER] to continue the cycle
-Type [exit] to stop it.
-Type [1] to add a player/monster.
-Type [2] to remove a player/monster.""")
-            spe.DrawLine(10, "-")
-            DisplayPlayerList(p_list)
-            exit = val.StringTrim("-> ")
-            if (exit.lower() == "exit"):
-                break
-            elif (exit == "1"):
-                clear()
-                AddPlayer(p_list)
-                spe.Wait("Return -> ")
-            elif (exit == "2"):
-                clear()
-                RemovePlayer(p_list)
-                spe.Wait("Return -> ")
-            elif (exit == ""):
-                p_list = spe.RotateList(p_list, 1)
-            else:
-                pass
-
-
-def InitiativeTracker():
-    """
-    Sub-Menu for the Initiative Tracker
-    """
-    while True:
-        clear()
-        print(
-bcolors.HEADER + "Initiative Tracker:" + bcolors.ENDC +
-"""
-1 - Add a Player
-2 - Remove a Player
-3 - Clear Player List
-4 - Display Player List
-5 - Start Initiative Cycling
-0 - Return""")
-        subChoice = val.IntInsideInterval("Pick an option : ", 0, 5)
-        m_playerList.sort(key=attrgetter('initiativeNb'), reverse=True) # Sort by initiative
-
-        if (subChoice == 1):
-            clear()
-            AddPlayer(m_playerList)
-            spe.Wait("Return -> ")
-        elif (subChoice == 2):
-            clear()
-            RemovePlayer(m_playerList)
-            spe.Wait("Return -> ")
-        elif (subChoice == 3):
-            clear()
-            print(bcolors.HEADER + "Clear Player List:" + bcolors.OKGREEN + "\nList cleared." + bcolors.ENDC)
-            del m_playerList[:] # Deletes everything in the list
-            spe.Wait("Return -> ")
-        elif (subChoice == 4):
-            clear()
-            print(bcolors.HEADER + "Display Player List:" + bcolors.ENDC)
-            DisplayPlayerList(m_playerList)
-            spe.Wait("Return -> ")
-        elif (subChoice == 5):
-            cyclingList = copy.deepcopy(m_playerList)
-            InitiativeCycling(cyclingList)
-        elif (subChoice == 0):
-            break
-        else:
-            print(bcolors.FAIL + "***Bypassed restrictions." + bcolors.ENDC)
-
-
 def DiceRolling():
     """
     Sub-Menu for the Dice Rolling
@@ -340,6 +257,93 @@ def DiceRolling():
             print("RESULT : ", score(n))
             spe.Wait("Return -> ")
         elif (choice == 0):
+            break
+        else:
+            print(bcolors.FAIL + "***Bypassed restrictions." + bcolors.ENDC)
+
+
+def InitiativeCycling(p_list: list):
+    """
+    Function for the "Start Initiative Cycling option".
+    Tells the Game Master who's turn it is.
+    """
+    if (len(p_list) < 2):
+        clear()
+        print(bcolors.HEADER + "Start Initiative Cycling:" + bcolors.WARNING + "\nNot enough players to start." + bcolors.ENDC)
+        spe.Wait("Return -> ")
+    else:
+        while True:
+            clear()
+            print(
+bcolors.HEADER + "Start Initiative Cycling:" + bcolors.ENDC +
+"""
+Press [ENTER] to continue the cycle
+Type [exit] to stop it.
+Type [1] to add a player/monster.
+Type [2] to remove a player/monster.
+Type [3] to roll dice.""")
+            spe.DrawLine(10, "-")
+            DisplayPlayerList(p_list)
+            exit = val.StringTrim("-> ")
+            if (exit.lower() == "exit"):
+                break
+            elif (exit == "1"):
+                clear()
+                AddPlayer(p_list)
+                spe.Wait("Return -> ")
+            elif (exit == "2"):
+                clear()
+                RemovePlayer(p_list)
+                spe.Wait("Return -> ")
+            elif (exit == "3"):
+                clear()
+                DiceRolling()
+            elif (exit == ""):
+                p_list = spe.RotateList(p_list, 1)
+            else:
+                pass
+
+
+def InitiativeTracker():
+    """
+    Sub-Menu for the Initiative Tracker
+    """
+    while True:
+        clear()
+        print(
+bcolors.HEADER + "Initiative Tracker:" + bcolors.ENDC +
+"""
+1 - Add a Player
+2 - Remove a Player
+3 - Clear Player List
+4 - Display Player List
+5 - Start Initiative Cycling
+0 - Return""")
+        subChoice = val.IntInsideInterval("Pick an option : ", 0, 5)
+        m_playerList.sort(key=attrgetter('initiativeNb'), reverse=True) # Sort by initiative
+
+        if (subChoice == 1):
+            clear()
+            AddPlayer(m_playerList)
+            spe.Wait("Return -> ")
+        elif (subChoice == 2):
+            clear()
+            RemovePlayer(m_playerList)
+            spe.Wait("Return -> ")
+        elif (subChoice == 3):
+            clear()
+            print(bcolors.HEADER + "Clear Player List:" + bcolors.OKGREEN + "\nList cleared." + bcolors.ENDC)
+            del m_playerList[:] # Deletes everything in the list
+            spe.Wait("Return -> ")
+        elif (subChoice == 4):
+            clear()
+            print(bcolors.HEADER + "Display Player List:" + bcolors.ENDC)
+            DisplayPlayerList(m_playerList)
+            spe.Wait("Return -> ")
+        elif (subChoice == 5):
+            cyclingList = copy.deepcopy(m_playerList)
+            InitiativeCycling(cyclingList)
+        elif (subChoice == 0):
             break
         else:
             print(bcolors.FAIL + "***Bypassed restrictions." + bcolors.ENDC)

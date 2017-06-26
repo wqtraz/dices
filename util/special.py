@@ -4,6 +4,33 @@ Special functions.
 
 
 from util import validate as val
+import time
+
+
+CURSOR_UP_ONE = '\x1b[1A' # Moves the cursor up one line
+ERASE_LINE = '\x1b[2K'
+
+class bcolors:
+    """
+    A class that lets you use colors in the console.
+
+    HEADER is purple.
+    OKBLUE is dark blue.
+    OKGREEN is green.
+    WARNING is yellow.
+    FAIL is red.
+    ENDC is the normal color. You use this after using any color.
+    BOLD is white.
+    UNDERLINE underlines text.
+    """
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
 
 
 def Wait(p_question: str):
@@ -46,10 +73,11 @@ def MenuWithBrackets(p_question: str):
             choices.append((p_question[c+1]).lower())
 
     while True:
-        character = (val.Char(p_question)).lower()
+        character = (val.Char(ERASE_LINE + p_question)).lower()
         
         if (character not in choices):
-            print("***Enter a character between brackets you dangus.")
+            print(CURSOR_UP_ONE + ERASE_LINE + bcolors.FAIL + "***Enter a character between brackets you dangus." + bcolors.ENDC, end="\r")
+            time.sleep(3)
         else:
             return character
 
