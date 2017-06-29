@@ -50,17 +50,22 @@ class Initiative(list):
 
 m_playerList = [] # The list that will have all the information about players and initiative
 clear = lambda: os.system('cls') # You can use clear() to clear the console of all text
+os.system('mode con: cols=90 lines=30') # Resizing the console
 ctypes.windll.kernel32.SetConsoleTitleW("Dices (made with Python)")
 
 
 def About():
+    """
+    The About of this program.
+    """
     clear()
     print(bcolors.HEADER + "About:" + bcolors.ENDC + 
 """
 This program was made by:
     wqtraz (on GitHub)
     DAgostinateur (on GitHub)
-""")
+
+This program is a utility for running D&D 5th edition games.""")
     spe.Wait("Return -> ")
 
 
