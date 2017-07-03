@@ -16,7 +16,19 @@ from util import validate as val, special as spe
 import os
 import copy
 import ctypes
+from tkinter import *
+from tkinter import messagebox
 
+
+root = Tk()
+root.geometry('{}x{}'.format(500, 300))
+
+
+def Exit():
+    """
+    Exits the GUI program.
+    """
+    root.destroy()
 
 class bcolors:
     """
@@ -352,6 +364,25 @@ bcolors.HEADER + "Initiative Tracker:" + bcolors.ENDC +
             break
         else:
             print(bcolors.FAIL + "***Bypassed restrictions." + bcolors.ENDC)
+
+
+someText = Label(root, text="MAIN MENU")
+someText.pack(anchor=NW)
+
+diceRollingB = Button(root, text="Dice Rolling")
+diceRollingB.pack(anchor=NW)
+
+initiativeTrackerB = Button(root, text="Initiative Tracker")
+initiativeTrackerB.pack(anchor=NW)
+
+aboutB = Button(root, text="About")
+aboutB.pack(anchor=NW)
+
+exitB = Button(root, text="Exit", command=Exit)
+exitB.pack(anchor=NW)
+
+
+#root.mainloop()
 
 
 while True:
